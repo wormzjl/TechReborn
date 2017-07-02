@@ -82,7 +82,7 @@ public abstract class BaseRecipe implements IBaseRecipeType, Cloneable {
 
     @Override
     public boolean useOreDic() {
-        return true;
+        return false;
     }
 
     @Override

@@ -183,7 +183,7 @@ public class RecipeCrafter {
         for (ItemStack input : currentRecipe.getInputs()) {
             Boolean hasItem = false;
             for (int inputSlot : inputSlots) {//Checks to see if it can find the input
-                if (ItemUtils.isItemEqual(input, inventory.getStackInSlot(inputSlot), true, true, currentRecipe.useOreDic()) && inventory.getStackInSlot(inputSlot).stackSize >= input.stackSize) {
+                if (ItemUtils.isItemEqual(input, inventory.getStackInSlot(inputSlot), true, false, currentRecipe.useOreDic()) && inventory.getStackInSlot(inputSlot).stackSize >= input.stackSize) {
                     hasItem = true;
                 }
             }
@@ -200,7 +200,7 @@ public class RecipeCrafter {
         for (ItemStack input : recipeType.getInputs()) {
             Boolean hasItem = false;
             for (int inputslot : inputSlots) {
-                if (ItemUtils.isItemEqual(input, inventory.getStackInSlot(inputslot), true, true, recipeType.useOreDic()) && inventory.getStackInSlot(inputslot).stackSize >= input.stackSize) {
+                if (ItemUtils.isItemEqual(input, inventory.getStackInSlot(inputslot), true, false, recipeType.useOreDic()) && inventory.getStackInSlot(inputslot).stackSize >= input.stackSize) {
                     hasItem = true;
                 }
             }
@@ -216,7 +216,7 @@ public class RecipeCrafter {
         }
         for (ItemStack input : currentRecipe.getInputs()) {
             for (int inputSlot : inputSlots) {//Uses all of the inputs
-                if (ItemUtils.isItemEqual(input, inventory.getStackInSlot(inputSlot), true, true, currentRecipe.useOreDic())) {
+                if (ItemUtils.isItemEqual(input, inventory.getStackInSlot(inputSlot), true, false, currentRecipe.useOreDic())) {
                     inventory.decrStackSize(inputSlot, input.stackSize);
                     break;
                 }
@@ -231,7 +231,7 @@ public class RecipeCrafter {
         if (inventory.getStackInSlot(slot) == null) {
             return true;
         }
-        if (ItemUtils.isItemEqual(inventory.getStackInSlot(slot), stack, true, true, oreDic)) {
+        if (ItemUtils.isItemEqual(inventory.getStackInSlot(slot), stack, true, false, oreDic)) {
             if (stack.stackSize + inventory.getStackInSlot(slot).stackSize <= stack.getMaxStackSize()) {
                 return true;
             }
@@ -247,7 +247,7 @@ public class RecipeCrafter {
             inventory.setInventorySlotContents(slot, stack);
             return;
         }
-        if (ItemUtils.isItemEqual(inventory.getStackInSlot(slot), stack, true, true, currentRecipe.useOreDic())) {//If the slot has stuff in
+        if (ItemUtils.isItemEqual(inventory.getStackInSlot(slot), stack, true, false, currentRecipe.useOreDic())) {//If the slot has stuff in
             if (stack.stackSize + inventory.getStackInSlot(slot).stackSize <= stack.getMaxStackSize()) {//Check to see if it fits
                 ItemStack newStack = stack.copy();
                 newStack.stackSize = inventory.getStackInSlot(slot).stackSize + stack.stackSize;//Sets the new stack size
