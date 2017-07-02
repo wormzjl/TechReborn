@@ -31,7 +31,7 @@ public class RecipesStandalone implements ICompatModule {
         addShappedIc2Recipes();
         addTRRecipes();
 
-        FusionReactorRecipeHelper.registerRecipe(new FusionReactorRecipe(ItemCells.getCellByName("wolframium"), ItemCells.getCellByName("lithium"), BlockOre.getOreByName("Iridium"), 90000000, -2048, 1024));
+        //FusionReactorRecipeHelper.registerRecipe(new FusionReactorRecipe(ItemCells.getCellByName("wolframium"), ItemCells.getCellByName("lithium"), BlockOre.getOreByName("Iridium"), 90000000, -2048, 1024));
     }
 
     @Override

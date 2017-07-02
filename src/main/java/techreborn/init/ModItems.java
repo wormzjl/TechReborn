@@ -1,6 +1,5 @@
 package techreborn.init;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -98,21 +97,12 @@ public class ModItems {
         GameRegistry.registerItem(parts, "part");
         cells = new ItemCells();
         GameRegistry.registerItem(cells, "cell");
-        if(Loader.isModLoaded("IC2")){
-	        ItemStack ecell = IC2Items.getItem("cell").copy();
-	        for (int i = 0; i < ItemCells.types.length; i++) {
-		        if(FluidRegistry.getFluid("fluid" + ItemCells.types[i].toLowerCase()) != null){
-			        FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid("fluid" + ItemCells.types[i].toLowerCase()), ItemCells.getCellByName(ItemCells.types[i]), ecell);
-		        }
-	        }
-        } else {
-	        for (int i = 0; i < ItemCells.types.length; i++) {
-		        if(FluidRegistry.getFluid("fluid" + ItemCells.types[i].toLowerCase()) != null){
-			        FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid("fluid" + ItemCells.types[i].toLowerCase()), ItemCells.getCellByName(ItemCells.types[i]));
-		        }
-	        }
+        ItemStack ecell = IC2Items.getItem("cell").copy();
+        for (int i = 0; i < ItemCells.types.length; i++) {
+            if(FluidRegistry.getFluid("fluid" + ItemCells.types[i].toLowerCase()) != null){
+                FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluid("fluid" + ItemCells.types[i].toLowerCase()), ItemCells.getCellByName(ItemCells.types[i]), ecell);
+            }
         }
-
         rockCutter = PoweredItem.createItem(ItemRockCutter.class);
         GameRegistry.registerItem(rockCutter, "rockCutter");
         lithiumBatpack = PoweredItem.createItem(ItemLithiumBatpack.class);
