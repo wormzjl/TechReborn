@@ -60,7 +60,7 @@ public class TileEntityFusionController extends TilePowerAcceptor implements IIn
 
     @Override
     public double getMaxOutput() {
-        if(!(hasStartedCrafting&&currentRecipe.getEuTick()>0)){
+        if(!(hasStartedCrafting&&currentRecipe!=null&&currentRecipe.getEuTick()>0)){
             return 0;
         }
         return 1000000;
@@ -68,7 +68,7 @@ public class TileEntityFusionController extends TilePowerAcceptor implements IIn
 
     @Override
     public double getMaxInput() {
-        if((hasStartedCrafting&&currentRecipe.getEuTick()>0)){
+        if((hasStartedCrafting&&currentRecipe!=null&&currentRecipe.getEuTick()>0)){
             return 0;
         }
         return 8192;

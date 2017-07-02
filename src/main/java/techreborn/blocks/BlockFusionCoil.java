@@ -2,13 +2,16 @@ package techreborn.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import techreborn.init.ModBlocks;
 
-public class BlockFusionCoil extends BlockMachineBase {
+public class BlockFusionCoil extends Block {
+
+
 
     @SideOnly(Side.CLIENT)
     private IIcon iconFront;
@@ -22,6 +25,7 @@ public class BlockFusionCoil extends BlockMachineBase {
     public BlockFusionCoil(Material material) {
         super(material);
         setBlockName("techreborn.fusioncoil");
+        setHardness(2.0F);
         ModBlocks.blocksToCut.add(this);
     }
 
@@ -37,14 +41,7 @@ public class BlockFusionCoil extends BlockMachineBase {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess blockAccess, int x, int y, int z, int side) {
-        int metadata = getTileRotation(blockAccess, x, y, z);
-        if (side == metadata && blockAccess.getBlockMetadata(x, y, z) == 1) {
-            return this.iconFront;
-        }
-        return metadata == 0 && side == 3 ? this.iconFront
-                : side == 1 ? this.iconTop :
-                side == 0 ? this.iconBottom : (side == 0 ? this.iconTop
-                        : (side == metadata ? this.iconFront : this.blockIcon));
+        return blockIcon;
     }
 
 }

@@ -59,7 +59,8 @@ public class ContainerFusionReactor extends RebornContainer {
                 icrafting.sendProgressBarUpdate(this, 0, fusionController.coilStatus);
             }
             if (this.energy != (int) fusionController.getEnergy()) {
-                icrafting.sendProgressBarUpdate(this, 1, (int) fusionController.getEnergy());
+                icrafting.sendProgressBarUpdate(this, 1, ((int) fusionController.getEnergy())%32768);
+                icrafting.sendProgressBarUpdate(this, 5, ((int) fusionController.getEnergy())/32768);
             }
             if (this.tickTime != fusionController.crafingTickTime) {
                 icrafting.sendProgressBarUpdate(this, 2,  fusionController.crafingTickTime);
@@ -89,13 +90,15 @@ public class ContainerFusionReactor extends RebornContainer {
         if (id == 0) {
             this.coilStatus = value;
         }  else if (id == 1) {
-            this.energy = value;
+            this.energy = this.energy-this.energy%32768+value;
         } else if(id == 2){
             this.tickTime = value;
         } else if(id == 3){
             this.finalTickTime = value;
         } else if(id == 4){
             this.neededEU = value;
+        } else if(id == 5){
+            this.energy = this.energy%32768+value*32768;
         }
         if(tickTime == -1){
             tickTime = 0;
