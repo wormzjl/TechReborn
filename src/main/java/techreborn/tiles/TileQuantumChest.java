@@ -72,9 +72,9 @@ public class TileQuantumChest extends TileMachineBase implements IInventory,
 			if (storedItem != null && getStackInSlot(1) == null) 
 			{
 				ItemStack itemStack = storedItem.copy();
-				itemStack.stackSize = itemStack.getMaxStackSize();
+				itemStack.stackSize = Math.min(itemStack.stackSize,itemStack.getMaxStackSize());
 				setInventorySlotContents(1, itemStack);
-				storedItem.stackSize -= itemStack.getMaxStackSize();
+				storedItem.stackSize -= itemStack.stackSize;
 			} 
 			else if (ItemUtils.isItemEqual(getStackInSlot(1), storedItem, true, true)) 
 			{
