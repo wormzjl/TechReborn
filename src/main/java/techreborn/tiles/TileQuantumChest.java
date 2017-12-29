@@ -2,7 +2,7 @@ package techreborn.tiles;
 
 import ic2.api.tile.IWrenchable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -16,7 +16,7 @@ import techreborn.init.ModBlocks;
 
 import java.util.List;
 
-public class TileQuantumChest extends TileMachineBase implements IInventory,
+public class TileQuantumChest extends TileMachineBase implements ISidedInventory,
         IWrenchable, IDeepStorageUnit, IListInfoProvider {
 
     // Slot 0 = Input
@@ -25,6 +25,7 @@ public class TileQuantumChest extends TileMachineBase implements IInventory,
 
     //TODO use long so we can have 9,223,372,036,854,775,807 items instead of 2,147,483,647
     int storage = (int) Double.MAX_VALUE;
+    int[] AccessibleSlots = {0,1};
 
     public Inventory inventory = new Inventory(3, "TileQuantumChest", storage);
 
@@ -284,5 +285,28 @@ public class TileQuantumChest extends TileMachineBase implements IInventory,
             }
             info.add(size + " " + name);
         }
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
+        return AccessibleSlots;
+    }
+
+    @Override
+    public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, int p_102007_3_) {
+	    if(p_102007_1_ == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
+	    if(p_102008_1_ == 1)
+        {
+            return true;
+        }
+        return false;
     }
 }
