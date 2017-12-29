@@ -2,7 +2,7 @@ package techreborn.tiles;
 
 import ic2.api.tile.IWrenchable;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -13,9 +13,10 @@ import reborncore.common.util.Inventory;
 import reborncore.common.util.ItemUtils;
 import techreborn.init.ModBlocks;
 
+
 import java.util.List;
 
-public class TileDigitalChest extends TileMachineBase implements IInventory,
+public class TileDigitalChest extends TileMachineBase implements ISidedInventory,
         IWrenchable, IListInfoProvider {
 
     // Slot 0 = Input
@@ -24,6 +25,7 @@ public class TileDigitalChest extends TileMachineBase implements IInventory,
 
     //TODO use long so we can have 9,223,372,036,854,775,807 items instead of 2,147,483,647
     int storage = 32767;
+    int[] AccessibleSlots = {0,1};
 
     public Inventory inventory = new Inventory(3, "TileDigitalChest", storage);
 
@@ -262,4 +264,26 @@ public class TileDigitalChest extends TileMachineBase implements IInventory,
 
     }
 
+    @Override
+    public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
+        return AccessibleSlots;
+    }
+
+    @Override
+    public boolean canInsertItem(int slot, ItemStack slotitem, int side) {
+        if(slot == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canExtractItem(int slot, ItemStack slotitem, int side) {
+	    if(slot == 1)
+        {
+            return true;
+        }
+        return false;
+    }
 }
