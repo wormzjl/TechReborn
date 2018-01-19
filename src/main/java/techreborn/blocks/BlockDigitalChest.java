@@ -2,6 +2,8 @@ package techreborn.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,6 +35,9 @@ public class BlockDigitalChest extends BlockMachineBase {
     public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
         return new TileDigitalChest();
     }
+
+    @Override
+    protected void dropInventory(World world, int x, int y, int z) {}
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z,
